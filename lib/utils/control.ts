@@ -413,7 +413,7 @@ export default class Control {
    * @memberof Control
    */
   parsePos(pos: number): Value {
-    const index = Math.round(pos / this.gap)
+    const index = Math.ceil(pos / this.gap)
     return this.getValueByIndex(index)
   }
 
@@ -495,10 +495,6 @@ export default class Control {
       total = this.data.length - 1
     } else {
       total = new Decimal(this.max).minus(this.min).divide(this.interval).toNumber()
-    }
-    if (total - Math.floor(total) !== 0) {
-      this.emitError(ERROR_TYPE.INTERVAL)
-      return 0
     }
     return total
   }
